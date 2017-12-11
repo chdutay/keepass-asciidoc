@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.asciidoctor.maven</groupId>
+   <artifactId>asciidoc-keepass</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   
+   <name>Asciidoc to reveal.js Maven example</name>
+   <description>An example project that demonstrates how to integrate convert Asciidoc to a reveal.js presentation with the Asciidoctor Maven plugin.</description>
+   
+   <properties>
+      <project.slides.directory>${project.build.directory}/generated-slides</project.slides.directory>
+      <project.html.directory>${project.build.directory}/generated-html</project.html.directory>
+      <project.pdfs.directory>${project.build.directory}/generated-pdfs</project.pdfs.directory>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <asciidoctor.maven.plugin.version>1.5.6</asciidoctor.maven.plugin.version>
+      <asciidoctorj.version>1.5.6</asciidoctorj.version>
+      <jruby.version>1.7.26</jruby.version>
+      <revealjs.version>3.5.0</revealjs.version>
+      <!-- Use 'master' as version and remove the 'v' prefixing the download url to use the current snapshot version  -->
+      <asciidoctor-revealjs.version>1.0.4</asciidoctor-revealjs.version>
+      <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
+      <ant.version>1.9.6</ant.version>
+      <jsch.version>0.1.53</jsch.version>
+   </properties>
+   
+   <profiles>
+      <profile>
+         <id>site-slides</id>
+         <properties>
+           <deploy.local.directory>${project.slides.directory}</deploy.local.directory>
+           <deploy.remote.directory>/data/asciidoc-wiki/html/${project.artifactId}/slides</deploy.remote.directory>
+           <deploy.index.file>slides.html</deploy.index.file>
+         </properties>
+      </profile>
+      <profile>
+         <id>site-html</id>
+         <properties>
+           <deploy.local.directory>${project.html.directory}</deploy.local.directory>
+           <deploy.remote.directory>/data/asciidoc-wiki/html/${project.artifactId}/html</deploy.remote.directory>
+           <deploy.index.file>keepass.html</deploy.index.file>
+         </properties>
+      </profile>
+      <profile>
+         <id>deploy-site</id>
+         <activation>
+           <property>
+             <name>scp.host</name>
+           </property>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <artifactId>maven-antrun-plugin</artifactId>
+                  <version>1.8</version>
+                  <executions>
+                     <execution>
+                        <phase>install</phase>
+                        <goals>
+                           <goal>run</goal>
+                        </goals>
+                        <configuration>
+                           <target>
+                              <echo message="Remove remote directory ${deploy.remote.directory}" />
+                              <sshexec host="${scp.host}" username="${scp.user}" password="${scp.password}" verbose="false" trust="true"
+                                command="rm -rf ${deploy.remote.directory}" />
+                              <echo message="Create remote directory ${deploy.remote.directory}" />
+                              <sshexec host="${scp.host}" username="${scp.user}" password="${scp.password}" verbose="false" trust="true"
+                                command="mkdir -p ${deploy.remote.directory}" />
+                              <echo message="Upload local directory ${deploy.local.directory} to remote directory ${deploy.remote.directory}" />
+                              <scp todir="${scp.user}:${scp.password}@${scp.host}:${deploy.remote.directory}" trust="true">
+                                <fileset dir="${deploy.local.directory}" />
+                              </scp>
+                              <echo message="Create index.html" />
+                              <sshexec host="${scp.host}" username="${scp.user}" password="${scp.password}" verbose="false" trust="true"
+                                command=" ln -s ${deploy.remote.directory}/${deploy.index.file} ${deploy.remote.directory}/index.html" />
+                           </target>
+                        </configuration>
+                     </execution>
+                  </executions>
+                  <dependencies>
+                     <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-jsch</artifactId>
+                        <version>${ant.version}</version>
+                     </dependency>
+                     <dependency>
+                        <groupId>com.jcraft</groupId>
+                        <artifactId>jsch</artifactId>
+                        <version>${jsch.version}</version>
+                     </dependency>
+                  </dependencies>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
+   
+   <build>
+      <defaultGoal>process-resources</defaultGoal>
+      <plugins>
+         <plugin>
+            <groupId>com.googlecode.maven-download-plugin</groupId>
+            <artifactId>download-maven-plugin</artifactId>
+            <version>1.3.0</version>
+            <executions>
+               <execution>
+                  <id>install-asciidoctor-revealjs</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>wget</goal>
+                  </goals>
+                  <configuration>
+                     <url>https://github.com/asciidoctor/asciidoctor-reveal.js/archive/v${asciidoctor-revealjs.version}.zip</url>
+                     <unpack>true</unpack>
+                     <outputFileName>asciidoctor-reveal.js-${asciidoctor-revealjs.version}.zip</outputFileName>
+                     <outputDirectory>${project.build.directory}</outputDirectory>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>install-revealjs</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>wget</goal>
+                  </goals>
+                  <configuration>
+                     <url>https://github.com/hakimel/reveal.js/archive/${revealjs.version}.zip</url>
+                     <unpack>true</unpack>
+                     <outputFileName>reveal.js-${revealjs.version}.zip</outputFileName>
+                     <outputDirectory>${project.slides.directory}</outputDirectory>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>${asciidoctor.maven.plugin.version}</version>
+            <dependencies>
+               <dependency>
+                  <groupId>org.asciidoctor</groupId>
+                  <artifactId>asciidoctorj-pdf</artifactId>
+                  <version>${asciidoctorj.pdf.version}</version>
+               </dependency>
+               <!-- Comment this section to use the default jruby artifact provided by the plugin -->
+               <dependency>
+                  <groupId>org.jruby</groupId>
+                  <artifactId>jruby-complete</artifactId>
+                  <version>${jruby.version}</version>
+               </dependency>
+               <!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+               <dependency>
+                  <groupId>org.asciidoctor</groupId>
+                  <artifactId>asciidoctorj</artifactId>
+                  <version>${asciidoctorj.version}</version>
+               </dependency>
+            </dependencies>
+            <configuration>
+               <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+            </configuration>
+            <executions>
+               <execution>
+                  <id>asciidoc-to-slides</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                     <goal>process-asciidoc</goal>
+                  </goals>
+                  <configuration>
+                     <outputDirectory>${project.slides.directory}</outputDirectory>
+                     <backend>revealjs</backend>
+                     <templateDir>${project.build.directory}/asciidoctor-reveal.js-${asciidoctor-revealjs.version}/templates/slim</templateDir>
+                     <sourceHighlighter>coderay</sourceHighlighter>
+                     <attributes>
+                        <!-- 
+                                    As we are downloading reveal.js in runtime, it sits in a nonstandard folder `reveal.js-${revealjs.version}`
+                                -->
+                        <revealjsdir>reveal.js-${revealjs.version}</revealjsdir>
+                        <!-- put here the reveal.js specific attributes -->
+                        <sourcedir>${basedir}/src/main/java</sourcedir>
+                        <revealjs_theme>black</revealjs_theme>
+                        <revealjs_transition>linear</revealjs_transition>
+                        <project-version>${project.version}</project-version>
+                     </attributes>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>asciidoc-to-pdf</id>
+                  <!--<phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>-->
+                  <configuration>
+                     <!--<sourceDirectory>src/docs/asciidoc</sourceDirectory>-->
+                    <outputDirectory>${project.pdfs.directory}</outputDirectory>
+                     <backend>pdf</backend>
+                     <!-- Since 1.5.0-alpha.9, PDF back-end can also use 'rouge' which provides more coverage
+                            for other languages like scala -->
+                     <sourceHighlighter>coderay</sourceHighlighter>
+                     <attributes>
+                        <pagenums />
+                        <toc />
+                        <idprefix />
+                        <idseparator>-</idseparator>
+                        <sourcedir>${basedir}/src/main/java</sourcedir>
+                        <project-version>${project.version}</project-version>
+                     </attributes>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>asciidoc-to-html</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>process-asciidoc</goal>
+                  </goals>
+                  <configuration>
+                     <!--<sourceDirectory>src/docs/asciidoc</sourceDirectory>-->
+                     <outputDirectory>${project.html.directory}</outputDirectory>
+                     <backend>html5</backend>
+                     <sourceHighlighter>coderay</sourceHighlighter>
+                     <attributes>
+                        <imagesdir>./images</imagesdir>
+                        <toc>left</toc>
+                        <icons>font</icons>
+                        <sectanchors>true</sectanchors>
+                        <!-- set the idprefix to blank -->
+                        <idprefix />
+                        <idseparator>-</idseparator>
+                        <docinfo1>true</docinfo1>
+                        <sourcedir>${basedir}/src/main/java</sourcedir>
+                        <project-version>${project.version}</project-version>
+                     </attributes>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>

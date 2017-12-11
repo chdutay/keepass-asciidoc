@@ -1,0 +1,16 @@
+/target/
+/.classpath
+/.project
+/.settings/**
+/.externalToolBuilders/
+.project
+*/target/*
+.classpath
+.idea/
+.settings/
+classes/*
+pom.xml.versionsBackup
+/*.iml
+.extract/*
+**/*.jar
+mvn-install.cmd

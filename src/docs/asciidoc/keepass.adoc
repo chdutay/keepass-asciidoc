@@ -1,0 +1,333 @@
+:revealjs_theme: white
+:theme: white
+
+:icons: font
+
+:revealjs_history: true
+:history: true
+
+:revealjs_center: false
+:center: false
+
+= Keepass - Gestionnaire de mot de passe
+Dutay Charles-Henri
+2017-11-21
+https://powerman.name/doc/asciidoc
+https://github.com/asciidoctor/asciidoctor-reveal.js/#revealjs-options
+
+== Installer Keepass 2
+
+Télécharger Keepass 2 sur le site officiel : https://keepass.info/download.html
+
+Suivre les informations d'installation
+
+[NOTE.speaker]
+--
+Formulaire de test :
+https://keepass.info/help/kb/testform.html
+--
+
+== Créer une database
+
+=== sécurisation de sa base de données
+
+[%step]
+* Master Password : Mot de passe d'ouverture de la base de données
+* Key File : Fichier nécessaire pour l'accès à la base de données
+* Windows user account : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
+
+ifdef::backend-revealjs[=== !]
+
+[CAUTION]
+--
+Je vous déconseille d'utiliser la dernière solution, si le PC est effacé alors la base de données risque d'être perdue. Un message d'information donnée plus de précision.
+
+Si vous perdez votre mot de passe et/ou votre fichier clé alors votre base est perdue :(
+--
+
+ifdef::backend-revealjs[=== !]
+
+TIP: Utiliser le fichier clé afin d'ajouter une balise XML pour donner un indice sur votre mot de passe ou carrément stocker votre mot de passe (Soyez malin et ne le stockez pas en clair !!). 
+
+[NOTE.speaker]
+--
+Supprimer les groupes
+--
+
+== Une nouvelle entrée 
+
+.PILOT : https://pilot.open-groupe.com/
+
+[%step]
+- Nom de l'entrée
+- Login
+- Password
+- URL
+- Date d'expiration 
+
+TIP: On peut réorganiser les entrées avec les combinaisons "Alt + UP" ou "Alt + DOWN"
+
+[NOTE.speaker]
+--
+Faire expirer une clé pendant la séance afin de montrer l'intérêt de cette option.
+--
+
+== Utiliser les entrées enregistrées dans Keepass
+
+* Double clic sur les champs Login / Password / URL
+** Le double clic sur l'URL ouvre le navigateur mais cela peut être modifié
+* Drag&Drop
+* Copier/Coller : 
+** Ctrl + B : Copier le login
+** Ctrl + C : Copier le mot de passe
+
+ifdef::backend-revealjs[=== !]
+
+* Auto-type manuel avec le focus : *Ctrl + V*
+* Auto-type automatique par défaut : *Ctrl + A*  
+** Cela fonctionne avec le titre de la fenêtre sur laquelle on appelle la commande Ctrl + A
+
+=== Dupliquer une entrée et utiliser des références
+
+Il est possible de dupliquer des entrées mais de conserver une référence entre les entrées. 
+
+.Intérêt
+
+Cela permet d'utiliser un même compte sur plusieurs applications. 
+Par exemple avec le LDAP Open qui est utilisé sur plusieurs applications.
+
+* https://openspace.open-groupe.com/
+* https://login.microsoftonline.com/
+
+ifdef::backend-revealjs[=== !]
+
+[TIP]
+--
+Avec l'auto-type, si plusieurs entrées sont trouvées elles sont proposées dans une fenêtre.
+
+Si plusieurs bases de données sont ouvertes, elles sont toutes utilisées pour trouver une entrée compatible avec l'auto-type.
+
+On peut modifier l'utilisateur et faire une concaténation avec la référence : @open-groupe.com
+--
+
+== Auto-type
+
+=== Configurer l'Auto-type
+
+Par défaut, l'auto-type fonctionne avec le titre de la fenêtre dans le titre de l'entrée.
+
+Cela n'est pas forcément facile d'utiliser le titre de la fenêtre du navigateur pour faire le lien entre une entrée et une page :
+
+* Par exemple Office 365 : https://login.microsoftonline.com/
+
+ifdef::backend-revealjs[=== !]
+
+De plus, l'auto-type ne fonctionne plus si on change le nom de l'entrée : Pilot -> OPEN - Pilot.
+
+[TIP]
+--
+Il semble que l'auto-type "Target Windows" permette de s'exécuter sur la fenêtre appelée. 
+
+Mais si toutes les entrées sont nommées comme ça, il sera difficile de trouver l'entrée vraiment voulue.
+--
+
+=== Configurer une cible
+
+Il est possible de configurer l'auto-type pour que cela fonctionne avec une fênetre en particulier comme Chrome en la sélectionnant dans la liste proposée.
+
+CAUTION: Cela ne fonctionnera qu'avec la fenêtre indiquée, soit Chrome et pas sous IE
+
+=== Utiliser un filtre pour les cibles
+
+Comme cela ne fonctionne plus sous IE, on peut utiliser un filtre avec le wildcard * pour identifier une cible : \*Pilot*
+
+
+=== Utiliser un auto-type spécifique
+
+On configure l'auto-type pour l'entrée Office 365 afin de l'utiliser sous Chrome.
+
+La combinaison Ctrl + A semble fonctionner mais Office 365 utilise l'authentification en 2 temps. Pas pratique !!
+
+On peut alors modifier la séquence de l'auto-type afin de prendre en compte cette particularité.
+
+ifdef::backend-revealjs[=== !]
+
+Voici la séquence par défaut :
+----
+{USERNAME}{TAB}{PASSWORD}{ENTER}
+----
+
+Voici la séquence à utiliser pour ajouter un délai permettant l'affichage de la page de authentification en 2 temps :
+----
+{USERNAME}{TAB}{DELAY 7000}{PASSWORD}{ENTER}
+----
+
+
+=== Utiliser un auto-type spécifique pour un groupe
+
+Il possible d'utiliser un auto-type particulier pour un groupe. Par exemple, un groupe FileZilla. Toutes les entrées de ce groupe utiliseront l'auto-type défini.
+
+On peut utiliser Keepass pour renseigner directement un formulaire FileZilla.
+
+Voici la séquence à utiliser :
+----
+{URL}{TAB}{UserName}{TAB}{Password}{TAB}{S:PORT}{ENTER}
+----
+
+ifdef::backend-revealjs[=== !]
+
+Dans la séquence on trouve l'expression {S:PORT} qui permet d'utiliser une variable personnalisée appelée : PORT
+
+Lorsque l'on créé une nouvelle entrée, il faudra ajouter la propriété PORT dans l'entrée et mettre l'IP ou le HOST dans le champ URL. Si la propriété n'existe pas alors Keepass affiche une erreur.
+
+ifdef::backend-revealjs[=== !]
+
+On peut également utiliser une partie de l'URL pour ne pas avoir à créer un champ personnalisé PORT.
+
+Dans ce cas, l'URL devra avoir la forme suivante : http://192.168.2.1:22
+
+----
+{URL:HOST}{TAB}{UserName}{TAB}{Password}{TAB}{URL:PORT}{ENTER}
+----
+
+TIP: https://keepass.info/help/base/placeholders.html
+
+== URL
+
+=== PUTTY
+
+On renseigne l'URL suivante permettant de lancer directement Putty avec les informations de connection :
+
+----
+cmd://c:\apps\putty.exe -ssh {USERNAME}@192.168.2.1 -l {USERNAME} -pw {PASSWORD}
+----
+
+Si on copier l'URL, elle est directement renseignée avec les informations :
+
+----
+cmd://c:\apps\putty.exe -ssh root@192.168.2.1 -l root -pw root
+----
+
+=== RDP
+
+On renseigne l'URL suivante pour une connexion bureau à distance :
+----
+cmd://mstsc.exe /v:10.229.38.70 /f
+----
+
+=== Ouvrir un navigateur par défaut 
+On peut choisir le navigateur qui ouvre l'URL. Cela peut être utile avec un auto-type défini sur un navigateur en particulier.
+
+* cmd://{INTERNETEXPLORER} "https://www.example.com/"
+* cmd://{FIREFOX} "https://www.example.com/"
+* cmd://{OPERA} "https://www.example.com/"
+* cmd://{GOOGLECHROME} "https://www.example.com/"
+* cmd://{SAFARI} "https://www.example.com/"
+
+----
+cmd://{INTERNETEXPLORER} "https://login.microsoftonline.com/"
+----
+
+https://keepass.info/help/base/autourl.html
+
+
+== CMD Line
+
+Il est possible d'utiliser des commandes dans le raccourci KeePass. 
+
+On peut par exemple définir la base à ouvrir et sélectionner le fichier de clé.
+
+----
+"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\temp\example.kdbx" -preselect:"C:\Users\me\Keepass\me.key"
+----
+
+
+On peut par exemple définir la base à ouvrir et l'ouvrir directement. Néanmoins le mot de passe reste visible.
+
+----
+"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\temp\example.kdbx" -keyfile:"C:\Users\me\Keepass\me.key" -pw:P@ssw0rd
+----
+
+
+https://keepass.info/help/base/cmdline.html
+
+
+
+== Sync
+
+Il est possible de synchroniser plusieurs bases de données Keepass 
+
+=== Manuellement
+
+Uliser le menu 'File' -> 'Synchronize' choisir l'option 'Synchronize with File'.
+
+Les deux bases de données doivent avoir le même mot de passe Master. 
+
+Cela peut être utile pour partager un Keepass projet avec plusieurs personnes et que chacun puisse l'enrichir.
+
+
+=== KScript
+
+Permet la synchronisation en ligne de commande avec KScript
+
+https://keepass.info/help/v2_dev/scr_sc_index.html
+
+
+.Command: Sync
+
+This command synchronizes the database with another one. The other database path has to be specified using the "-File" command line parameter. Usage example:
+
+----
+KPScript -c:Sync -guikeyprompt "C:\Path\A.kdbx" -File:"C:\Path\B.kdbx"
+----
+
+https://keepass.info/help/v2/sync.html
+
+
+== Triggers 
+
+Il est possible d'ajouter des actions en automatique sur différents évènements :
+
+* Application initialized:
+* Application started and ready:
+* Application exit:
+* Opened database file:
+* Saving database file:
+* Saved database file:
+* Closing database file (before saving):
+* Closing database file (after saving):
+* Copied entry data to clipboard:
+* User interface state updated:
+* Custom toolbar button clicked:
+
+https://keepass.info/help/v2/triggers.html
+
+.Exemple de trigger :
+
+* Backup your database when you open KeePass
+* Export to a different format when you save
+* Auditing KeePass changes
+* Preventing infinite loops
+* Synchronizing with Dropbox / other PC synchronization software
+* Using multiple databases at the same time
+* Saving automatically
+* Auto-Type password only
+* Miscellaneous triggers:
+* Open database on-demand
+* Synchronize with Box.com
+
+https://keepass.info/help/kb/trigger_examples.html
+
+
+== Clé RSA 
+
+
+== ChromeIPass et FoxIPass : Extension navigateur
+
+
+
+----
+*Listing* Block
+
+Use: code or file listings
+----
