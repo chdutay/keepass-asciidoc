@@ -29,7 +29,7 @@ https://keepass.info/help/kb/testform.html
 
 == Créer une database
 
-=== sécurisation de sa base de données
+=== Sécurisation de sa base de données
 
 [%step]
 * Master Password : Mot de passe d'ouverture de la base de données
@@ -40,7 +40,7 @@ ifdef::backend-revealjs[=== !]
 
 [CAUTION]
 --
-Je vous déconseille d'utiliser la dernière solution, si le PC est effacé alors la base de données risque d'être perdue. Un message d'information donnée plus de précision.
+Je vous déconseille d'utiliser la dernière solution, si le PC est effacé alors la base de données risque d'être perdue. Un message d'information donne plus de précision.
 
 Si vous perdez votre mot de passe et/ou votre fichier clé alors votre base est perdue :(
 --
