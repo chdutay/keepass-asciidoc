@@ -9,106 +9,372 @@
 :revealjs_center: false
 :center: false
 
+:experimental: true
+
+ifndef::imagesdir[:imagesdir: ./images]
+
 = Keepass - Gestionnaire de mot de passe
 Dutay Charles-Henri
 2017-11-21
+
+////
 https://powerman.name/doc/asciidoc
+http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
 https://github.com/asciidoctor/asciidoctor-reveal.js/#revealjs-options
+////
 
-== Installer Keepass 2
+== Introduction
 
-Télécharger Keepass 2 sur le site officiel : https://keepass.info/download.html
+=== Keepass c'est quoi ?
 
-Suivre les informations d'installation
+Ce logiciel est un logiciel qui vous permet de sauvegarder de manière sécurisée l'ensemble de vos
+mots de passes. 
 
+C'est l'équivalent d'une « boite à clé » ou d'un coffre fort où seraient stockés tous vos
+mots de passe.
+
+=== Pourquoi utiliser Keepass ?
+
+Peut-être avez vous du mal à vous souvenir de tous vos mots de passe et vous les avez enregistrés dans
+un document texte...
+
+Peut-être utilisez-vous la fonction d'enregistrement automatique de mot de passe de votre navigateur
+Internet...
+
+Ces informations ne sont pas chiffrées, n'importe qui accédant à votre ordinateur en votre absence ou
+par Internet via une faille de sécurité peut facilement accéder à vos mots de passe.
+
+Des logiciels peuvent retrouver les mots de passes enregistrés dans Internet Explorer (IEpassview)
+Mozilla Firefox (PasswordFox) ou Google Chrome (ChromePass).
+
+Keepass permet de stocker toutes ces données sensibles dans un seul document protégé par un mot
+de passe, le seul que vous devrez retenir. Le cryptage utilisé pour chiffrer vos donnée est similaire à
+celui employé dans le secteur bancaire.
+
+Dans Keepass les mots de passes sont enregistrés dans une base de donnée, ce qui permet de les
+organiser et les rechercher plus facilement.
+
+== Installer Keepass 
+
+Télécharger Keepass 2.xx sur le site officiel : https://keepass.info/download.html
+
+Suivre les informations d'installation.
+
+
+ifdef::backend-revealjs[]
 [NOTE.speaker]
 --
 Formulaire de test :
 https://keepass.info/help/kb/testform.html
 --
+endif::backend-revealjs[]
 
-== Créer une database
+=== Installer la langue Française
+
+Par défaut, Keepass est en Anglais mais il est possible de télécharger et installer d'autres langues en utilisant le menu menu:View[Change Language...]
+
+Cliquer ensuite sur le bouton btn:[++Get More Languages ...++] et télécharger la langue désirée pour la version installée (2.xx).
+
+Une fois le téléchargement terminée, dézippé le package téléchargé et copier le fichier *French.lngx* dans le répertoire d'installation de Keepass (où se trouve l'exécutable *KeePass.exe*).
+
+[TIP]
+====
+Par défaut il s'agit du répertoire link:++C:\Program Files (x86)\KeePass Password Safe 2++[]
+====
+
+Redémarrer Keepass et retourner dans l'écran de paramétrage de la langue en utilisant le menu menu:View[Change Language...]
+
+Sélectionner la langue désirée et redémarrer comme demandé.
+
+
+== Créer une base de données
+
+Pour créer une nouvelle base de donnée utiliser le menu menu:Fichier[Nouvelle...].
+
+ifdef::backend-revealjs[]
+
+WARNING: Un message d'avertissement vous prévient que votre base de données sera stockée dans un fichier qu'il faudra sauvegarder.
+
+Sélectionner un nom de fichier et un répertoire et Enregistrer.
+
+[NOTE.speaker]
+--
+Entrer le nom demo.kdbx
+--
+
+endif::backend-revealjs[]
+
+
 
 === Sécurisation de sa base de données
 
+Voici les différentes options pour sécuriser l'accès à votre base de données.
+
 [%step]
-* Master Password : Mot de passe d'ouverture de la base de données
-* Key File : Fichier nécessaire pour l'accès à la base de données
-* Windows user account : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
+* Mot de passe principal (Master Password) : Mot de passe d'ouverture de la base de données
+* Options expert :
+** Fichier clé/fournisseur (Key File) : Fichier clé nécessaire pour l'accès à la base de données
+** Compte utilisateur Windows (Windows user account) : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
+
+image:00-CréerCléPrincipaleComposée-Unset.jpg[]
 
 ifdef::backend-revealjs[=== !]
 
-[CAUTION]
+[CAUTION.speaker]
 --
-Je vous déconseille d'utiliser la dernière solution, si le PC est effacé alors la base de données risque d'être perdue. Un message d'information donne plus de précision.
+Je vous *déconseille* d'utiliser la dernière solution, si le PC est effacé alors la base de données risque d'être perdue. Un message d'information donne plus de précision.
 
 Si vous perdez votre mot de passe et/ou votre fichier clé alors votre base est perdue :(
 --
 
-ifdef::backend-revealjs[=== !]
+Je vous conseille d'utiliser à minima un mot de passe principal pour votre base de données en utilisant :
 
-TIP: Utiliser le fichier clé afin d'ajouter une balise XML pour donner un indice sur votre mot de passe ou carrément stocker votre mot de passe (Soyez malin et ne le stockez pas en clair !!). 
+* Minuscule
+* Majuscule
+* Chiffre
+* Caractères spéciaux
+
+Il faut que ce mot de passe soit très sécurisé mais également facile à retenir car si vous perdez votre mot de passe, la base de donnée ne sera plus accessible.
+
+TIP: Vérifiez la qualité de votre mot de passe en essayant d'être à la moitié : 60 bits
+
+
+Je vous conseille également d'utiliser un fichier clé/fournisseur pour sécurisé l'accès à votre base de données. 
+
+Pour cela cocher la case "Fichier clé/fournisseur" pour activer l'option.
+
+Cliquer sur le bouton "Créer" et ensuite nommer et enregistrer le fichier \*.key
+
+Une fenêtre apparaît pour définir un niveau de sécurité pour la clé. Utilisez la souris sur l'image en noir et blanc pour atteindre le score de 256 bits.
+
+image:01-CollecteEntropieDebut.jpg[]  image:02-CollecteEntropieFin.jpg[]
+
+Cliquer sur Ok et enfin valider la création de la base de données
+
+image::03-CréerCléPrincipaleComposée.jpg[]
+
+
+TIP: Vous essayerez au possible de ne pas stocker le fichier de base de données (\*.kdbx) et le fichier clé (*.key) dans le même répertoire.
+
+
+[TIP]
+====
+Modifier le fichier clé afin d'ajouter une balise XML pour donner un indice sur votre mot de passe ou carrément stocker votre mot de passe.
+
+----
+<?xml version="1.0" encoding="utf-8"?>
+<KeyFile>
+	<Meta>
+		<Version>1.00</Version>
+		<Secret>Le mot De passe Est coMposé du nOm de la base en mixant des majuscules et des chiffres à la place de lettre. Il est doublé par sécurité.</Secret>
+	</Meta>
+	<Key>
+		<Data>I1gYi/c0x7fp6DjZmDGI7QbxvfEEw5JqFZk6KM7J7z8=</Data>
+	</Key>
+</KeyFile>
+----
+====
+
+
+
+=== Paramètres de la base de données
+
+Sur cet écran vous pouvez ajouter un nom et une description et terminer la création
+
+image::04-CréerNouvelleBaseDonnées-étape3.jpg[]
+
+
+
+=== Feuille de secours
+
+Comme indiqué précédemment, si vous perdez votre mot de passe principal Keepass, votre base de données est perdue. 
+
+Keepass vous propose d'imprimer une feuille sur laquelle vous pourrez renseigner les informations de votre base de données.
+
+image::05-FeuilleDeSecours.jpg[]
+
+
+
+
+=== La base de données
+
+Vous vous retrouvez maintenant devant votre base de donnée vide à l'exception de deux exemples de
+mots de passe enregistrés.
+
+image::06-demo.kdbx.jpg[]
+
+On remarque l'existence de Groupe permettant d'organiser ses entrées.
+
+TIP: On peut réorganiser les groupes et les entrées avec les combinaisons kbd:[Alt+UP] ou kbd:[Alt+DOWN]
+
+ifdef::backend-revealjs[]
+====
 
 [NOTE.speaker]
 --
 Supprimer les groupes
 --
+endif::backend-revealjs[]
+
+
+
 
 == Une nouvelle entrée 
 
-.PILOT : https://pilot.open-groupe.com/
+Pour créer une nouvelle entrée, il faut se positionner sur le groupe dans lequel on veut ajouter l'entrée et cliquer sur le bouton image:07-BoutonAjouterEntrée.jpg[]
 
+image::08-AjouterEntrée.jpg[]
+
+Voici les informations à saisir :
 [%step]
-- Nom de l'entrée
-- Login
-- Password
-- URL
-- Date d'expiration 
+- Titre : Saisir le nom de l'entrée (Vous pouvez personnaliser l'icône)
+- Nom d'utilisateur : Saisir le nom du champ utilisateur à remplir
+- Mot de passe : Saisir et confirmer le mot de passe
+- Adresse (URL) : Saisir l'URL de la page de connexion Web
+- Date d'expiration (Expirera le) : Option permettant de faire expirer une entrée
 
-TIP: On peut réorganiser les entrées avec les combinaisons "Alt + UP" ou "Alt + DOWN"
+[TIP]
+--
+Le bouton image:09-AjouterEntrée-AfficherMotPasse.jpg[] permet d'afficher le mot de passe saisi.
 
+Le bouton image:10-AjouterEntrée-GénérerMotPasse.jpg[] permet de générer automatiquement un mot de passe à partir de l'existant ou selon des règles définies.
+--
+
+Nous allons créer une nouvelle entrée pour PILOT : https://pilot.open-groupe.com/
+
+image::11-AjouterEntrée-Pilot.jpg[]
+
+ifdef::backend-revealjs[]
 [NOTE.speaker]
 --
 Faire expirer une clé pendant la séance afin de montrer l'intérêt de cette option.
 --
+endif::backend-revealjs[]
+
+
+
+=== Générateur de mot de passe
+
+Keepass ouvre la possibilité de générer automatiquement des mots de passe à partir de règles définies.
+
+image::46-GenerateurMdP-Options.jpg[]
+
+Par défaut, il propose :
+
+* Ouvrir le générateur de mot de passe... 
+* Dérivé du mot de passe précédent : S'inspire des caractères et de la longueur du mot de passe actuel pour en générer un nouveau (Très pratique pour les mots de passe expirant régulièrement)
+* Mot de passe générés automatiquement pour les nouvelles entrées : Génère un mot de passe selon les règles du profil
+* Les profils avec par défaut : 
+** Adresse MAC
+** Touche Hex - 40 bits - 128 bits - 256 bits
+
+Le générateur de mot de passe permet de modifier les profils existant et leurs règles de génération de mot de passe.
+
+image::47-GenerateurMdP-Fenêtre.jpg[]
+
+On peut modifier les paramètres affichés et choisir ses règles. Dans ce cas le profil devient `(personnaliser)`
+
+image::48-GenerateurMdP-Personnaliser.jpg[]
+
+Ensuite en cliquant sur la disquette, on peut créer ou écraser un profil existant :
+
+image::49-GenerateurMdP-Enregistrer.jpg[]
+
+L'onglet Prévisualisation permet de valider le format des mots de passe automatiquement générés selon les règles dégfinies
+
+image::50-GenerateurMdP-Prévisualisation.jpg[]
+
+Le profil créé apparaît maintenant dans la liste des générateurs
+
+image::51-GenerateurMdP-OptionsNouveauProfil.jpg[]
+
+Et le mot de passe obtenu est conforme aux règles définies
+
+image::52-GenerateurMdP-MdPGénéré.jpg[]
+
+
+
+
+
 
 == Utiliser les entrées enregistrées dans Keepass
 
-* Double clic sur les champs Login / Password / URL
+Une fois qu'une entrée est enregistrée, Keepass ouvre la possibilité de l'utiliser de plusieurs manières :
+
+* Double clic sur les champs Login / Password pour les copier dans le presse-papier pendant 12 secondes
 ** Le double clic sur l'URL ouvre le navigateur mais cela peut être modifié
-* Drag&Drop
+* Drag&Drop depuis Keepass vers les champs du formulaire (pratique avec le double écran)
 * Copier/Coller : 
-** Ctrl + B : Copier le login
-** Ctrl + C : Copier le mot de passe
+** kbd:[Ctrl+B] : Copier le login
+** kbd:[Ctrl+C] : Copier le mot de passe
 
 ifdef::backend-revealjs[=== !]
 
-* Auto-type manuel avec le focus : *Ctrl + V*
-* Auto-type automatique par défaut : *Ctrl + A*  
-** Cela fonctionne avec le titre de la fenêtre sur laquelle on appelle la commande Ctrl + A
+
+
+
+=== Utiliser l'Auto-type 
+
+Mais Keepass propose une fonction avancée : l'Auto-type.
+
+Il peut être utilisé de 2 manières.
+
+* Auto-type manuel : kbd:[Ctrl+V]
+** Positionner le focus dans le formulaire à remplir puis sélectionner une entrée manuellement dans Keepass et saisir kbd:[Ctrl+V]
+* Auto-type automatique par défaut : kbd:[Ctrl+Alt+A]
+** Positionner le focus dans le formulaire à remplir et saisir kbd:[Ctrl+Alt+A]
+
+[TIP]
+--
+L'auto-type automatique fonctionne par défaut avec le titre de la fenêtre sur laquelle on appelle la commande kbd:[Ctrl+Alt+A]
+
+Avec l'auto-type, si plusieurs entrées sont trouvées elles sont proposées dans une fenêtre.
+
+Si plusieurs bases de données sont ouvertes, elles sont toutes utilisées pour trouver une entrée compatible avec l'auto-type.
+--
+
+ifdef::backend-revealjs[]
+[NOTE.speaker]
+--
+Faire la démonstration avec Pilot
+--
+endif::backend-revealjs[]
+
+
 
 === Dupliquer une entrée et utiliser des références
 
-Il est possible de dupliquer des entrées mais de conserver une référence entre les entrées. 
+Avec Keepass, il est possible de dupliquer des entrées et une option permet de conserver une référence entre les entrées. 
 
-.Intérêt
-
-Cela permet d'utiliser un même compte sur plusieurs applications. 
-Par exemple avec le LDAP Open qui est utilisé sur plusieurs applications.
+Cela permet d'utiliser un même compte sur plusieurs applications et de créer une entrée pour chacune.
+Par exemple : le LDAP Open est utilisé sur plusieurs applications.
 
 * https://openspace.open-groupe.com/
 * https://login.microsoftonline.com/
 
-ifdef::backend-revealjs[=== !]
+image::12-DupliquerEntrée-Clic.jpg[]
+
+image::13-DupliquerEntrée-Popup.jpg[]
+
+image::14-DupliquerEntrée-NouvelleEntrée.jpg[]
+
+
+Une fois dupliquée, l'entrée peut être modifiée comme n'importe quelle autre entrée.
+
+image::15-DupliquerEntrée-ModifierEntrée.jpg[]
+
+image::16-DupliquerEntrée-EntréeModifiée.jpg[]
 
 [TIP]
 --
-Avec l'auto-type, si plusieurs entrées sont trouvées elles sont proposées dans une fenêtre.
-
-Si plusieurs bases de données sont ouvertes, elles sont toutes utilisées pour trouver une entrée compatible avec l'auto-type.
-
 On peut modifier l'utilisateur et faire une concaténation avec la référence : @open-groupe.com
+
+image::17-DupliquerEntrée-ModifierUtilisateur.jpg[]
 --
+
+
+
+
 
 == Auto-type
 
@@ -122,33 +388,57 @@ Cela n'est pas forcément facile d'utiliser le titre de la fenêtre du navigateu
 
 ifdef::backend-revealjs[=== !]
 
-De plus, l'auto-type ne fonctionne plus si on change le nom de l'entrée : Pilot -> OPEN - Pilot.
+De plus, l'auto-type ne fonctionne plus si on change le nom de l'entrée :
 
-[TIP]
+* Pilot -> OPEN - Pilot.
+
+
+ifdef::backend-revealjs[]
+[TIP.speaker]
 --
 Il semble que l'auto-type "Target Windows" permette de s'exécuter sur la fenêtre appelée. 
 
 Mais si toutes les entrées sont nommées comme ça, il sera difficile de trouver l'entrée vraiment voulue.
 --
+endif::backend-revealjs[]
+
+
+
 
 === Configurer une cible
 
-Il est possible de configurer l'auto-type pour que cela fonctionne avec une fênetre en particulier comme Chrome en la sélectionnant dans la liste proposée.
+Keepass ouvre la possibilité de configurer l'auto-type pour que cela fonctionne avec une fenêtre en particulier comme Chrome en la sélectionnant dans la liste proposée.
+
+image::18-ConfigurerAutoType-Ajouter.jpg[]
+
+image::19-ConfigurerAutoType-Chrome.jpg[]
+
+image::20-ConfigurerAutoType-Ajouté.jpg[]
 
 CAUTION: Cela ne fonctionnera qu'avec la fenêtre indiquée, soit Chrome et pas sous IE
+
+
 
 === Utiliser un filtre pour les cibles
 
 Comme cela ne fonctionne plus sous IE, on peut utiliser un filtre avec le wildcard * pour identifier une cible : \*Pilot*
 
+image::21-ConfigurerAutoType-Modifier.jpg[]
+
+image::22-ConfigurerAutoType-TitreWildcard.jpg[]
+
+
 
 === Utiliser un auto-type spécifique
 
-On configure l'auto-type pour l'entrée Office 365 afin de l'utiliser sous Chrome.
+En suiuvant les instructions précédente, on peut configurer l'auto-type pour l'entrée Office 365 afin de l'utiliser sous Chrome.
 
-La combinaison Ctrl + A semble fonctionner mais Office 365 utilise l'authentification en 2 temps. Pas pratique !!
+image::23-ConfigurerAutoType-SequenceTitre.jpg[]
 
-On peut alors modifier la séquence de l'auto-type afin de prendre en compte cette particularité.
+
+La combinaison kbd:[Ctrl+A] semble fonctionner mais Office 365 utilise l'authentification en 2 temps. Pas pratique !!
+
+Keepass offre alors la prossibilité de modifier la séquence de l'auto-type afin de prendre en compte cette particularité.
 
 ifdef::backend-revealjs[=== !]
 
@@ -159,8 +449,11 @@ Voici la séquence par défaut :
 
 Voici la séquence à utiliser pour ajouter un délai permettant l'affichage de la page de authentification en 2 temps :
 ----
-{USERNAME}{TAB}{DELAY 7000}{PASSWORD}{ENTER}
+{USERNAME}{TAB}{ENTER}{DELAY 7000}{PASSWORD}{ENTER}
 ----
+
+image::24-ConfigurerAutoType-SequencePerso.jpg[]
+
 
 
 === Utiliser un auto-type spécifique pour un groupe
@@ -169,30 +462,98 @@ Il possible d'utiliser un auto-type particulier pour un groupe. Par exemple, un 
 
 On peut utiliser Keepass pour renseigner directement un formulaire FileZilla.
 
+
+image::25-AjouterGroupe-Nom.jpg[]
+
 Voici la séquence à utiliser :
 ----
-{URL}{TAB}{UserName}{TAB}{Password}{TAB}{S:PORT}{ENTER}
+{URL}{TAB}{USERNAME}{TAB}{PASSWORD}{TAB}{S:PORT}{ENTER}
 ----
 
-ifdef::backend-revealjs[=== !]
+image::26-AjouterGroupe-Sequence.jpg[]
+
+
+
+==== Entrée : Paramètre avancé
 
 Dans la séquence on trouve l'expression {S:PORT} qui permet d'utiliser une variable personnalisée appelée : PORT
 
-Lorsque l'on créé une nouvelle entrée, il faudra ajouter la propriété PORT dans l'entrée et mettre l'IP ou le HOST dans le champ URL. Si la propriété n'existe pas alors Keepass affiche une erreur.
+Lorsque l'on créé une nouvelle entrée, il faudra ajouter la propriété PORT dans l'entrée et mettre l'IP ou le HOST dans le champ URL. 
+Si la propriété n'existe pas alors Keepass affiche une erreur en orange.
 
-ifdef::backend-revealjs[=== !]
+image::27-AjouterGroupe-FilezillaEntréeAvecErreur.jpg[]
+
+image::28-AjouterGroupe-FilezillaAvancé.jpg[]
+
+image::29-AjouterGroupe-FilezillaChamp.jpg[]
+
+image::30-AjouterGroupe-FilezillaEntréeSansErreur.jpg[]
+
+
+
+==== Entrée : Paramètre avancé URL
 
 On peut également utiliser une partie de l'URL pour ne pas avoir à créer un champ personnalisé PORT.
 
 Dans ce cas, l'URL devra avoir la forme suivante : http://192.168.2.1:22
 
+image::31-URLavecPORT-FilezillaEntrée.jpg[]
+
+Et la séquence sera alors :
+
 ----
-{URL:HOST}{TAB}{UserName}{TAB}{Password}{TAB}{URL:PORT}{ENTER}
+{URL:HOST}{TAB}{USERNAME}{TAB}{PASSWORD}{TAB}{URL:PORT}{ENTER}
 ----
 
-TIP: https://keepass.info/help/base/placeholders.html
+image::32-URLavecPORT-FilezillaSequence.jpg[]
 
-== URL
+TIP: Plus d'information : https://keepass.info/help/base/placeholders.html
+
+
+
+
+
+== Sync
+
+Il est possible de synchroniser plusieurs bases de données Keepass. 
+Cette option peut être utile pour partager un Keepass projet avec plusieurs personnes et que chacun puisse l'enrichir.
+
+image::35-Synchro-FichierSchema.jpg[]
+
+Pour cela, utiliser le menu menu:Fichier[Synchroniser > Synchroniser avec le fichier ...].
+
+image::36-Synchro-Fichier.jpg[]
+
+TIP: Si vous synchroniser deux bases de données différentes, elles doivent avoir le même mot de passe Master. 
+
+
+
+
+
+
+
+== URL personnalisée
+
+=== Navigateur par défaut 
+On peut choisir le navigateur qui ouvre l'URL. Cela peut être utile avec un auto-type défini sur un navigateur en particulier.
+
+Modifier l'entrée et configurer la propriété URL
+
+image::33-URLperso-Modifier.jpg[]
+
+image::34-URLperso-InternetExplorer.jpg[]
+
+Il est également possible de le faire manuellement directement dans le champ URL
+
+----
+cmd://{INTERNETEXPLORER} "https://www.example.org/"
+cmd://{FIREFOX} "https://www.example.org/"
+cmd://{OPERA} "https://www.example.org/"
+cmd://{GOOGLECHROME} "https://www.example.org/"
+cmd://{SAFARI} "https://www.example.org/"
+----
+
+
 
 === PUTTY
 
@@ -202,7 +563,7 @@ On renseigne l'URL suivante permettant de lancer directement Putty avec les info
 cmd://c:\apps\putty.exe -ssh {USERNAME}@192.168.2.1 -l {USERNAME} -pw {PASSWORD}
 ----
 
-Si on copier l'URL, elle est directement renseignée avec les informations :
+Si on copie l'URL, elle est directement renseignée avec les informations :
 
 ----
 cmd://c:\apps\putty.exe -ssh root@192.168.2.1 -l root -pw root
@@ -215,76 +576,176 @@ On renseigne l'URL suivante pour une connexion bureau à distance :
 cmd://mstsc.exe /v:10.229.38.70 /f
 ----
 
-=== Ouvrir un navigateur par défaut 
-On peut choisir le navigateur qui ouvre l'URL. Cela peut être utile avec un auto-type défini sur un navigateur en particulier.
-
-* cmd://{INTERNETEXPLORER} "https://www.example.com/"
-* cmd://{FIREFOX} "https://www.example.com/"
-* cmd://{OPERA} "https://www.example.com/"
-* cmd://{GOOGLECHROME} "https://www.example.com/"
-* cmd://{SAFARI} "https://www.example.com/"
-
-----
-cmd://{INTERNETEXPLORER} "https://login.microsoftonline.com/"
-----
-
-https://keepass.info/help/base/autourl.html
+TIP: Plus d'information : https://keepass.info/help/base/autourl.html
 
 
-== CMD Line
+
+== Plugins
+
+Ils existent de nombreux plugins pour Keepass listés par catégories dans cette page link:https://keepass.info/plugins.html[]
+
+* Backup & Synchronization & IO
+* Utilities
+* Cryptography & Key Providers
+* Export
+* Import & Export
+* Automation & Scripting
+* Resources
+* For Developers Only
+* Sample Plugins  
+
+Des plugins ont été développés afin d'utiliser les entrées Keepass directement dans son navigateur préféré.
+
+
+=== ChromeIPass : Extension Chrome
+
+==== Installer KeePassHttp 
+
+Ce plugin va permettre à l'extension du navigateur Chrome que nous allons installer de communiquer avec Keepass.
+
+- Télécharger le fichier link:https://raw.github.com/pfn/keepasshttp/master/KeePassHttp.plgx[KeePassHttp.plgx] depuis link:https://raw.github.com/pfn/keepasshttp/[GitHub]
+
+- Copier le fichier KeePassHttp.plgx dans le dossiers Plugins (le créer au besoin) du répertoire d'installation de Keepass (où se trouve l'exécutable *KeePass.exe*).
+
+[TIP]
+====
+Par défaut, le répertoire d'installation de Keepass est link:++C:\Program Files (x86)\KeePass Password Safe 2++[]
+====
+
+- Démarrer ou redémarrer Keepass et aller dans le menu menu:Outils[Greffons (Plugins) ...]
+
+image::37-PluginsHTTP-install.jpg[]
+
+- Le plugin KeePassHttp doit maintenant apparaître. Il est installé.
+
+image::38-PluginsHTTP-installOK.jpg[]
+
+
+==== Installer ChromeIPass
+
+Pour cela, il suffit d'installer l'extension link:http://keepass.info/plugins.html#chromeipass[ChromeIPass] dans le navigateur Chrome.
+
+Une fois l'installation terminée, il est nécessaire de se connecter sur le Keepass local via le plugin KeePassHttp.
+
+Cliquer sur l'icône de l'extension et cliquer sur le bouton Connect 
+
+image::39-PluginsChrome-ConfigHttp.jpg[]
+
+Ensuite il faut renseigner un mot de passe *MAIS PAS* le mot de passe principal de sa base de données. 
+
+Ce mot de passe sera utilisé par l'extension pour se connecter sur votre base de données. 
+
+Une nouvelle entrée apparait dans Keepass : `KeePassHttp Settings`. Vous pouvez bien sûr enregistrer le mot de passe saisi dans cette entrée.
+
+image::40a-PluginsChrome-ConfigHttpPair.jpg[]
+
+TIP: Cette action devra être effectuée pour toutes les bases de données que vous utilisez.
+
+Maintenez, lorsque vous arrivez sur un site ayant une entrée enregistrée, ChromeIPass remplira automatiquement les champs login et password détecté. 
+
+image::40b-PluginsChrome-formulaire.jpg[]
+
+Si jamais, les champs ne sont pas identifiés automatiquement, vous pouvez les définir manuellement en cliquant sur l'icône de l'extension et en choisissant l'option : Choose own credential fields for this page
+
+image::39-PluginsChrome-ConfigHttp.jpg[]
+
+
+
+=== KeeFox : Extension Firefox
+
+==== Installer KeePassRPC
+
+Ce plugin va permettre à l'extension du navigateur Firefox que nous allons installer de communiquer avec Keepass.
+
+- Télécharger le fichier link:https://github.com/kee-org/keepassrpc/releases[KeePassRPC.plgx] depuis link:https://github.com/kee-org/keepassrpc/[GitHub]
+
+- Copier le fichier KeePassRPC.plgx dans le dossiers Plugins (le créer au besoin) du répertoire d'installation de Keepass (où se trouve l'exécutable *KeePass.exe*).
+
+[TIP]
+====
+Par défaut, le répertoire d'installation de Keepass est link:++C:\Program Files (x86)\KeePass Password Safe 2++[]
+====
+
+- Démarrer ou redémarrer Keepass et aller dans le menu menu:Outils[Greffons (Plugins) ...]
+
+image::37-PluginsHTTP-install.jpg[]
+
+- Le plugin KeePassRPC doit maintenant apparaître. Il est installé.
+
+image::41-PluginsRPC-installOK.jpg[]
+
+
+==== Installer KeeFox
+
+Pour cela, il suffit d'installer l'extension link:https://keepass.info/plugins.html#keefox[KeeFox] dans le navigateur Firefox.
+
+Une fois l'installation terminée, assurez vous que Keepass soit ouvert sur votre base de données et redémarrer Firefox.
+
+Lorsque le navigateur redémarre, les fenêtres de configuration de Keepass et KeeFox vont apparaître. 
+Il faut copier le code en Rouge dans le champ d'autorisation KeeFox.
+
+image::42-PluginsFirefox-ConfigRPC.jpg[]
+
+TIP: Cette action devra être effectuée pour toutes les bases de données que vous utilisez.
+
+Maintenez, lorsque vous arrivez sur un site ayant une entrée enregistrée, il faudra effectuer une recherche d'entrée pour la page. 
+
+image::43-PluginsFirefox-SearchEntries.jpg[]
+
+image::44-PluginsFirefox-Matching.jpg[]
+
+image::45-PluginsFirefox-Formulaire.jpg[]
+
+
+
+
+
+
+== Pour aller plus loin
+
+
+=== CMD Line
 
 Il est possible d'utiliser des commandes dans le raccourci KeePass. 
 
 On peut par exemple définir la base à ouvrir et sélectionner le fichier de clé.
 
 ----
-"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\temp\example.kdbx" -preselect:"C:\Users\me\Keepass\me.key"
+"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\tmp\demo.kdbx" -preselect:"C:\tmp\demo.key"
 ----
 
 
 On peut par exemple définir la base à ouvrir et l'ouvrir directement. Néanmoins le mot de passe reste visible.
 
 ----
-"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\temp\example.kdbx" -keyfile:"C:\Users\me\Keepass\me.key" -pw:P@ssw0rd
+"C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe" "C:\tmp\demo.kdbx" -keyfile:"C:\tmp\demo.key" -pw:Dem0Dem0
 ----
 
 
-https://keepass.info/help/base/cmdline.html
+TIP: Plus d'information : https://keepass.info/help/base/cmdline.html
 
-
-
-== Sync
-
-Il est possible de synchroniser plusieurs bases de données Keepass 
-
-=== Manuellement
-
-Uliser le menu 'File' -> 'Synchronize' choisir l'option 'Synchronize with File'.
-
-Les deux bases de données doivent avoir le même mot de passe Master. 
-
-Cela peut être utile pour partager un Keepass projet avec plusieurs personnes et que chacun puisse l'enrichir.
 
 
 === KScript
 
 Permet la synchronisation en ligne de commande avec KScript
 
-https://keepass.info/help/v2_dev/scr_sc_index.html
-
 
 .Command: Sync
-
-This command synchronizes the database with another one. The other database path has to be specified using the "-File" command line parameter. Usage example:
-
 ----
 KPScript -c:Sync -guikeyprompt "C:\Path\A.kdbx" -File:"C:\Path\B.kdbx"
 ----
 
+[TIP]
+-- 
+Plus d'information : +
+https://keepass.info/help/v2_dev/scr_sc_index.html +
 https://keepass.info/help/v2/sync.html
+--
 
 
-== Triggers 
+
+=== Triggers 
 
 Il est possible d'ajouter des actions en automatique sur différents évènements :
 
@@ -300,7 +761,7 @@ Il est possible d'ajouter des actions en automatique sur différents évènement
 * User interface state updated:
 * Custom toolbar button clicked:
 
-https://keepass.info/help/v2/triggers.html
+TIP: Plus d'information : https://keepass.info/help/v2/triggers.html
 
 .Exemple de trigger :
 
@@ -316,14 +777,7 @@ https://keepass.info/help/v2/triggers.html
 * Open database on-demand
 * Synchronize with Box.com
 
-https://keepass.info/help/kb/trigger_examples.html
-
-
-== Clé RSA 
-
-
-== ChromeIPass et FoxIPass : Extension navigateur
-
+TIP: Plus d'information : https://keepass.info/help/kb/trigger_examples.html
 
 
 ----
