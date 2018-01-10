@@ -186,13 +186,13 @@
                </execution>
                <execution>
                   <id>asciidoc-to-pdf</id>
-                  <!--<phase>generate-resources</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>-->
+                  <phase>generate-resources</phase>
+                  <goals>
+                      <goal>process-asciidoc</goal>
+                  </goals>
                   <configuration>
                      <!--<sourceDirectory>src/docs/asciidoc</sourceDirectory>-->
-                    <outputDirectory>${project.pdfs.directory}</outputDirectory>
+                     <outputDirectory>${project.pdfs.directory}</outputDirectory>
                      <backend>pdf</backend>
                      <!-- Since 1.5.0-alpha.9, PDF back-end can also use 'rouge' which provides more coverage
                             for other languages like scala -->

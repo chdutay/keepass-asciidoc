@@ -1,19 +1,32 @@
+// Options revealjs pour les Slides
 :revealjs_theme: white
 :theme: white
-
-:icons: font
-
 :revealjs_history: true
 :history: true
-
 :revealjs_center: false
 :center: false
 
+// activer les macros menu: et kbd:
 :experimental: true
 
+// Gestion de la table 
+
+// Numérotation en PDF
+ifdef::backend-pdf[:sectnums:]
+
+// table of content
+:toc:
+:toc-title: Sommaire
+ifdef::backend-pdf[:toclevels: 4]
+
+:icons: font
 ifndef::imagesdir[:imagesdir: ./images]
 
-= Keepass - Gestionnaire de mot de passe
+:encoding: utf-8
+:lang: fr
+
+
+= Keepass : Gestionnaire de mot de passe
 Dutay Charles-Henri
 2017-11-21
 
@@ -116,7 +129,7 @@ Voici les différentes options pour sécuriser l'accès à votre base de donnée
 ** Fichier clé/fournisseur (Key File) : Fichier clé nécessaire pour l'accès à la base de données
 ** Compte utilisateur Windows (Windows user account) : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
 
-image:00-CréerCléPrincipaleComposée-Unset.jpg[]
+image:00-CreerClePrincipaleComposee-Unset.jpg[]
 
 ifdef::backend-revealjs[=== !]
 
@@ -151,7 +164,7 @@ image:01-CollecteEntropieDebut.jpg[]  image:02-CollecteEntropieFin.jpg[]
 
 Cliquer sur Ok et enfin valider la création de la base de données
 
-image::03-CréerCléPrincipaleComposée.jpg[]
+image::03-CreerClePrincipaleComposee.jpg[]
 
 
 TIP: Vous essayerez au possible de ne pas stocker le fichier de base de données (\*.kdbx) et le fichier clé (*.key) dans le même répertoire.
@@ -181,7 +194,7 @@ Modifier le fichier clé afin d'ajouter une balise XML pour donner un indice sur
 
 Sur cet écran vous pouvez ajouter un nom et une description et terminer la création
 
-image::04-CréerNouvelleBaseDonnées-étape3.jpg[]
+image::04-CreerNouvelleBaseDonnees-etape3.jpg[]
 
 
 
@@ -221,9 +234,9 @@ endif::backend-revealjs[]
 
 == Une nouvelle entrée 
 
-Pour créer une nouvelle entrée, il faut se positionner sur le groupe dans lequel on veut ajouter l'entrée et cliquer sur le bouton image:07-BoutonAjouterEntrée.jpg[]
+Pour créer une nouvelle entrée, il faut se positionner sur le groupe dans lequel on veut ajouter l'entrée et cliquer sur le bouton image:07-BoutonAjouterEntree.jpg[]
 
-image::08-AjouterEntrée.jpg[]
+image::08-AjouterEntree.jpg[]
 
 Voici les informations à saisir :
 [%step]
@@ -235,14 +248,14 @@ Voici les informations à saisir :
 
 [TIP]
 --
-Le bouton image:09-AjouterEntrée-AfficherMotPasse.jpg[] permet d'afficher le mot de passe saisi.
+Le bouton image:09-AjouterEntree-AfficherMotPasse.jpg[] permet d'afficher le mot de passe saisi.
 
-Le bouton image:10-AjouterEntrée-GénérerMotPasse.jpg[] permet de générer automatiquement un mot de passe à partir de l'existant ou selon des règles définies.
+Le bouton image:10-AjouterEntree-GenererMotPasse.jpg[] permet de générer automatiquement un mot de passe à partir de l'existant ou selon des règles définies.
 --
 
 Nous allons créer une nouvelle entrée pour PILOT : https://pilot.open-groupe.com/
 
-image::11-AjouterEntrée-Pilot.jpg[]
+image::11-AjouterEntree-Pilot.jpg[]
 
 ifdef::backend-revealjs[]
 [NOTE.speaker]
@@ -270,7 +283,7 @@ Par défaut, il propose :
 
 Le générateur de mot de passe permet de modifier les profils existant et leurs règles de génération de mot de passe.
 
-image::47-GenerateurMdP-Fenêtre.jpg[]
+image::47-GenerateurMdP-Fenetre.jpg[]
 
 On peut modifier les paramètres affichés et choisir ses règles. Dans ce cas le profil devient `(personnaliser)`
 
@@ -282,7 +295,7 @@ image::49-GenerateurMdP-Enregistrer.jpg[]
 
 L'onglet Prévisualisation permet de valider le format des mots de passe automatiquement générés selon les règles dégfinies
 
-image::50-GenerateurMdP-Prévisualisation.jpg[]
+image::50-GenerateurMdP-Previsualisation.jpg[]
 
 Le profil créé apparaît maintenant dans la liste des générateurs
 
@@ -290,7 +303,7 @@ image::51-GenerateurMdP-OptionsNouveauProfil.jpg[]
 
 Et le mot de passe obtenu est conforme aux règles définies
 
-image::52-GenerateurMdP-MdPGénéré.jpg[]
+image::52-GenerateurMdP-MdPGenere.jpg[]
 
 
 
@@ -352,24 +365,24 @@ Par exemple : le LDAP Open est utilisé sur plusieurs applications.
 * https://openspace.open-groupe.com/
 * https://login.microsoftonline.com/
 
-image::12-DupliquerEntrée-Clic.jpg[]
+image::12-DupliquerEntree-Clic.jpg[]
 
-image::13-DupliquerEntrée-Popup.jpg[]
+image::13-DupliquerEntree-Popup.jpg[]
 
-image::14-DupliquerEntrée-NouvelleEntrée.jpg[]
+image::14-DupliquerEntree-NouvelleEntree.jpg[]
 
 
 Une fois dupliquée, l'entrée peut être modifiée comme n'importe quelle autre entrée.
 
-image::15-DupliquerEntrée-ModifierEntrée.jpg[]
+image::15-DupliquerEntree-ModifierEntree.jpg[]
 
-image::16-DupliquerEntrée-EntréeModifiée.jpg[]
+image::16-DupliquerEntree-EntreeModifiee.jpg[]
 
 [TIP]
 --
 On peut modifier l'utilisateur et faire une concaténation avec la référence : @open-groupe.com
 
-image::17-DupliquerEntrée-ModifierUtilisateur.jpg[]
+image::17-DupliquerEntree-ModifierUtilisateur.jpg[]
 --
 
 
@@ -413,7 +426,7 @@ image::18-ConfigurerAutoType-Ajouter.jpg[]
 
 image::19-ConfigurerAutoType-Chrome.jpg[]
 
-image::20-ConfigurerAutoType-Ajouté.jpg[]
+image::20-ConfigurerAutoType-Ajoute.jpg[]
 
 CAUTION: Cela ne fonctionnera qu'avec la fenêtre indiquée, soit Chrome et pas sous IE
 
@@ -481,13 +494,13 @@ Dans la séquence on trouve l'expression {S:PORT} qui permet d'utiliser une vari
 Lorsque l'on créé une nouvelle entrée, il faudra ajouter la propriété PORT dans l'entrée et mettre l'IP ou le HOST dans le champ URL. 
 Si la propriété n'existe pas alors Keepass affiche une erreur en orange.
 
-image::27-AjouterGroupe-FilezillaEntréeAvecErreur.jpg[]
+image::27-AjouterGroupe-FilezillaEntreeAvecErreur.jpg[]
 
-image::28-AjouterGroupe-FilezillaAvancé.jpg[]
+image::28-AjouterGroupe-FilezillaAvance.jpg[]
 
 image::29-AjouterGroupe-FilezillaChamp.jpg[]
 
-image::30-AjouterGroupe-FilezillaEntréeSansErreur.jpg[]
+image::30-AjouterGroupe-FilezillaEntreeSansErreur.jpg[]
 
 
 
@@ -497,7 +510,7 @@ On peut également utiliser une partie de l'URL pour ne pas avoir à créer un c
 
 Dans ce cas, l'URL devra avoir la forme suivante : http://192.168.2.1:22
 
-image::31-URLavecPORT-FilezillaEntrée.jpg[]
+image::31-URLavecPORT-FilezillaEntree.jpg[]
 
 Et la séquence sera alors :
 
