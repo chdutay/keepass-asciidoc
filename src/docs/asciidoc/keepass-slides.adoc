@@ -1,0 +1,77 @@
+// Options revealjs pour les Slides
+:revealjs_theme: white
+:theme: white
+:revealjs_history: true
+:history: true
+:revealjs_center: false
+:center: false
+
+// activer les macros menu: et kbd:
+:experimental: true
+
+// .admonitions-font
+// :include: //div[@class="slides"]
+// :header_footer:
+:icons: font
+
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+
+
+= Keepass : Gestionnaire de mot de passe
+Dutay Charles-Henri
+2017-11-21
+
+== Introduction
+
+=== Keepass c'est quoi ?
+
+include::keepass.adoc[tags=slide-2,indent=0]
+
+=== Pourquoi utiliser Keepass ?
+
+include::keepass.adoc[tags=slide-3,indent=0]
+
+[NOTE.speaker]
+--
+Formulaire de test :
+https://keepass.info/help/kb/testform.html
+--
+
+== Créer une base de données
+
+include::keepass.adoc[tags=slide-4,indent=0]
+
+WARNING: Un message d'avertissement vous prévient que votre base de données sera stockée dans un fichier qu'il faudra sauvegarder.
+
+Sélectionner un nom de fichier et un répertoire et Enregistrer.
+
+[NOTE.speaker]
+--
+Entrer le nom demo.kdbx
+--
+
+=== Sécurisation de sa base de données
+
+include::keepass.adoc[tags=slide-5,indent=0]
+include::keepass.adoc[tags=slide-5a,indent=0]
+
+ifdef::backend-revealjs[=== !]
+
+include::keepass.adoc[tags=slide-6,indent=0]
+
+ifdef::backend-revealjs[=== !]
+
+include::keepass.adoc[tags=slide-7,indent=0]
+include::keepass.adoc[tags=slide-8,indent=0]
+
+=== La base de données
+
+include::keepass.adoc[tags=slide-9,indent=0]
+include::keepass.adoc[tags=slide-10,indent=0]
+
+[NOTE.speaker]
+--
+Supprimer les groupes
+--

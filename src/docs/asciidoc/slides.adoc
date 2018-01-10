@@ -55,12 +55,13 @@ Press the `*esc*` key to get an overview of your slides.
 
 .include::subdir/_b.adoc[]
 
-include::subdir/_b.adoc[]
+//include::subdir/_b.adoc[]
 
 == Images
 
-[.thumb]
-image::sunset.jpg[scaledwidth=75%]
+//[.thumb]
+
+//image::sunset.jpg[scaledwidth=75%]
 
 == Attributes
 

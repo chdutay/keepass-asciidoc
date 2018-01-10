@@ -1,11 +1,3 @@
-// Options revealjs pour les Slides
-:revealjs_theme: white
-:theme: white
-:revealjs_history: true
-:history: true
-:revealjs_center: false
-:center: false
-
 // activer les macros menu: et kbd:
 :experimental: true
 
@@ -36,15 +28,22 @@ http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
 https://github.com/asciidoctor/asciidoctor-reveal.js/#revealjs-options
 ////
 
+
+
 == Introduction
 
 === Keepass c'est quoi ?
+
+// tag::slide-2[]
 
 Ce logiciel est un logiciel qui vous permet de sauvegarder de manière sécurisée l'ensemble de vos
 mots de passes. 
 
 C'est l'équivalent d'une « boite à clé » ou d'un coffre fort où seraient stockés tous vos
 mots de passe.
+
+// end::slide-2[]
+
 
 === Pourquoi utiliser Keepass ?
 
@@ -54,11 +53,14 @@ un document texte...
 Peut-être utilisez-vous la fonction d'enregistrement automatique de mot de passe de votre navigateur
 Internet...
 
+
 Ces informations ne sont pas chiffrées, n'importe qui accédant à votre ordinateur en votre absence ou
 par Internet via une faille de sécurité peut facilement accéder à vos mots de passe.
 
 Des logiciels peuvent retrouver les mots de passes enregistrés dans Internet Explorer (IEpassview)
 Mozilla Firefox (PasswordFox) ou Google Chrome (ChromePass).
+
+// tag::slide-3[]
 
 Keepass permet de stocker toutes ces données sensibles dans un seul document protégé par un mot
 de passe, le seul que vous devrez retenir. Le cryptage utilisé pour chiffrer vos donnée est similaire à
@@ -67,6 +69,8 @@ celui employé dans le secteur bancaire.
 Dans Keepass les mots de passes sont enregistrés dans une base de donnée, ce qui permet de les
 organiser et les rechercher plus facilement.
 
+// end::slide-3[]
+
 == Installer Keepass 
 
 Télécharger Keepass 2.xx sur le site officiel : https://keepass.info/download.html
@@ -74,13 +78,6 @@ Télécharger Keepass 2.xx sur le site officiel : https://keepass.info/download.
 Suivre les informations d'installation.
 
 
-ifdef::backend-revealjs[]
-[NOTE.speaker]
---
-Formulaire de test :
-https://keepass.info/help/kb/testform.html
---
-endif::backend-revealjs[]
 
 === Installer la langue Française
 
@@ -100,22 +97,15 @@ Redémarrer Keepass et retourner dans l'écran de paramétrage de la langue en u
 Sélectionner la langue désirée et redémarrer comme demandé.
 
 
+
 == Créer une base de données
+
+// tag::slide-4[]
 
 Pour créer une nouvelle base de donnée utiliser le menu menu:Fichier[Nouvelle...].
 
-ifdef::backend-revealjs[]
+// end::slide-4[]
 
-WARNING: Un message d'avertissement vous prévient que votre base de données sera stockée dans un fichier qu'il faudra sauvegarder.
-
-Sélectionner un nom de fichier et un répertoire et Enregistrer.
-
-[NOTE.speaker]
---
-Entrer le nom demo.kdbx
---
-
-endif::backend-revealjs[]
 
 
 
@@ -123,15 +113,19 @@ endif::backend-revealjs[]
 
 Voici les différentes options pour sécuriser l'accès à votre base de données.
 
+// tag::slide-5[]
+
 [%step]
 * Mot de passe principal (Master Password) : Mot de passe d'ouverture de la base de données
 * Options expert :
 ** Fichier clé/fournisseur (Key File) : Fichier clé nécessaire pour l'accès à la base de données
 ** Compte utilisateur Windows (Windows user account) : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
 
+// end::slide-5[]
+
 image:00-CreerClePrincipaleComposee-Unset.jpg[]
 
-ifdef::backend-revealjs[=== !]
+// tag::slide-5a[]
 
 [CAUTION.speaker]
 --
@@ -139,6 +133,11 @@ Je vous *déconseille* d'utiliser la dernière solution, si le PC est effacé al
 
 Si vous perdez votre mot de passe et/ou votre fichier clé alors votre base est perdue :(
 --
+
+// end::slide-5a[]
+
+
+// tag::slide-6[]
 
 Je vous conseille d'utiliser à minima un mot de passe principal pour votre base de données en utilisant :
 
@@ -149,10 +148,18 @@ Je vous conseille d'utiliser à minima un mot de passe principal pour votre base
 
 Il faut que ce mot de passe soit très sécurisé mais également facile à retenir car si vous perdez votre mot de passe, la base de donnée ne sera plus accessible.
 
-TIP: Vérifiez la qualité de votre mot de passe en essayant d'être à la moitié : 60 bits
+[TIP.speaker]
+Vérifiez la qualité de votre mot de passe en essayant d'être à la moitié : 60 bits
 
+// end::slide-6[]
+
+
+// tag::slide-7[]
 
 Je vous conseille également d'utiliser un fichier clé/fournisseur pour sécurisé l'accès à votre base de données. 
+
+
+// end::slide-7[]
 
 Pour cela cocher la case "Fichier clé/fournisseur" pour activer l'option.
 
@@ -167,8 +174,11 @@ Cliquer sur Ok et enfin valider la création de la base de données
 image::03-CreerClePrincipaleComposee.jpg[]
 
 
+// tag::slide-8[]
+
 TIP: Vous essayerez au possible de ne pas stocker le fichier de base de données (\*.kdbx) et le fichier clé (*.key) dans le même répertoire.
 
+// end::slide-8[]
 
 [TIP]
 ====
@@ -211,24 +221,23 @@ image::05-FeuilleDeSecours.jpg[]
 
 === La base de données
 
+
+// tag::slide-9[]
+
 Vous vous retrouvez maintenant devant votre base de donnée vide à l'exception de deux exemples de
 mots de passe enregistrés.
 
+// end::slide-9[]
+
 image::06-demo.kdbx.jpg[]
+
+// tag::slide-10[]
 
 On remarque l'existence de Groupe permettant d'organiser ses entrées.
 
 TIP: On peut réorganiser les groupes et les entrées avec les combinaisons kbd:[Alt+UP] ou kbd:[Alt+DOWN]
 
-ifdef::backend-revealjs[]
-====
-
-[NOTE.speaker]
---
-Supprimer les groupes
---
-endif::backend-revealjs[]
-
+// end::slide-10[]
 
 
 
