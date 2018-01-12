@@ -178,7 +178,7 @@
                         <revealjsdir>reveal.js-${revealjs.version}</revealjsdir>
                         <!-- put here the reveal.js specific attributes -->
                         <sourcedir>${basedir}/src/main/java</sourcedir>
-                        <revealjs_theme>black</revealjs_theme>
+                        <revealjs_theme>sky</revealjs_theme>
                         <revealjs_transition>linear</revealjs_transition>
                         <project-version>${project.version}</project-version>
                      </attributes>
@@ -187,9 +187,9 @@
                <execution>
                   <id>asciidoc-to-pdf</id>
                   <phase>generate-resources</phase>
-                  <goals>
+                  <!--<goals>
                       <goal>process-asciidoc</goal>
-                  </goals>
+                  </goals>-->
                   <configuration>
                      <!--<sourceDirectory>src/docs/asciidoc</sourceDirectory>-->
                      <outputDirectory>${project.pdfs.directory}</outputDirectory>
@@ -210,9 +210,9 @@
                <execution>
                   <id>asciidoc-to-html</id>
                   <phase>generate-resources</phase>
-                  <goals>
+                  <!--<goals>
                      <goal>process-asciidoc</goal>
-                  </goals>
+                  </goals>-->
                   <configuration>
                      <!--<sourceDirectory>src/docs/asciidoc</sourceDirectory>-->
                      <outputDirectory>${project.html.directory}</outputDirectory>

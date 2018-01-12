@@ -118,6 +118,7 @@ Voici les différentes options pour sécuriser l'accès à votre base de donnée
 [%step]
 * Mot de passe principal (Master Password) : Mot de passe d'ouverture de la base de données
 * Options expert :
+[%step]
 ** Fichier clé/fournisseur (Key File) : Fichier clé nécessaire pour l'accès à la base de données
 ** Compte utilisateur Windows (Windows user account) : Ouverture seulement si le compte Windows connecté est celui associé à la base de données 
 
@@ -243,9 +244,15 @@ TIP: On peut réorganiser les groupes et les entrées avec les combinaisons kbd:
 
 == Une nouvelle entrée 
 
+// tag::slide-11[]
+
 Pour créer une nouvelle entrée, il faut se positionner sur le groupe dans lequel on veut ajouter l'entrée et cliquer sur le bouton image:07-BoutonAjouterEntree.jpg[]
 
+// end::slide-11[]
+
 image::08-AjouterEntree.jpg[]
+
+// tag::slide-12[]
 
 Voici les informations à saisir :
 [%step]
@@ -255,31 +262,31 @@ Voici les informations à saisir :
 - Adresse (URL) : Saisir l'URL de la page de connexion Web
 - Date d'expiration (Expirera le) : Option permettant de faire expirer une entrée
 
-[TIP]
+
+[TIP.speaker]
 --
 Le bouton image:09-AjouterEntree-AfficherMotPasse.jpg[] permet d'afficher le mot de passe saisi.
 
 Le bouton image:10-AjouterEntree-GenererMotPasse.jpg[] permet de générer automatiquement un mot de passe à partir de l'existant ou selon des règles définies.
 --
 
+// end::slide-12[]
+
 Nous allons créer une nouvelle entrée pour PILOT : https://pilot.open-groupe.com/
 
 image::11-AjouterEntree-Pilot.jpg[]
 
-ifdef::backend-revealjs[]
-[NOTE.speaker]
---
-Faire expirer une clé pendant la séance afin de montrer l'intérêt de cette option.
---
-endif::backend-revealjs[]
-
-
 
 === Générateur de mot de passe
 
+// tag::slide-13[]
+
 Keepass ouvre la possibilité de générer automatiquement des mots de passe à partir de règles définies.
 
+// end::slide-13[]
+
 image::46-GenerateurMdP-Options.jpg[]
+
 
 Par défaut, il propose :
 
@@ -290,9 +297,15 @@ Par défaut, il propose :
 ** Adresse MAC
 ** Touche Hex - 40 bits - 128 bits - 256 bits
 
+// tag::slide-14[]
+
 Le générateur de mot de passe permet de modifier les profils existant et leurs règles de génération de mot de passe.
 
+// end::slide-14[]
+
 image::47-GenerateurMdP-Fenetre.jpg[]
+
+// tag::slide-15[]
 
 On peut modifier les paramètres affichés et choisir ses règles. Dans ce cas le profil devient `(personnaliser)`
 
@@ -314,6 +327,7 @@ Et le mot de passe obtenu est conforme aux règles définies
 
 image::52-GenerateurMdP-MdPGenere.jpg[]
 
+// end::slide-15[]
 
 
 
@@ -323,14 +337,18 @@ image::52-GenerateurMdP-MdPGenere.jpg[]
 
 Une fois qu'une entrée est enregistrée, Keepass ouvre la possibilité de l'utiliser de plusieurs manières :
 
+// tag::slide-16[]
+
+[%step]
 * Double clic sur les champs Login / Password pour les copier dans le presse-papier pendant 12 secondes
 ** Le double clic sur l'URL ouvre le navigateur mais cela peut être modifié
 * Drag&Drop depuis Keepass vers les champs du formulaire (pratique avec le double écran)
 * Copier/Coller : 
+[%step]
 ** kbd:[Ctrl+B] : Copier le login
 ** kbd:[Ctrl+C] : Copier le mot de passe
 
-ifdef::backend-revealjs[=== !]
+// end::slide-16[]
 
 
 
@@ -341,12 +359,15 @@ Mais Keepass propose une fonction avancée : l'Auto-type.
 
 Il peut être utilisé de 2 manières.
 
+// tag::slide-17[]
+
+[%step]
 * Auto-type manuel : kbd:[Ctrl+V]
 ** Positionner le focus dans le formulaire à remplir puis sélectionner une entrée manuellement dans Keepass et saisir kbd:[Ctrl+V]
 * Auto-type automatique par défaut : kbd:[Ctrl+Alt+A]
 ** Positionner le focus dans le formulaire à remplir et saisir kbd:[Ctrl+Alt+A]
 
-[TIP]
+[TIP.speaker]
 --
 L'auto-type automatique fonctionne par défaut avec le titre de la fenêtre sur laquelle on appelle la commande kbd:[Ctrl+Alt+A]
 
@@ -355,16 +376,14 @@ Avec l'auto-type, si plusieurs entrées sont trouvées elles sont proposées dan
 Si plusieurs bases de données sont ouvertes, elles sont toutes utilisées pour trouver une entrée compatible avec l'auto-type.
 --
 
-ifdef::backend-revealjs[]
-[NOTE.speaker]
---
-Faire la démonstration avec Pilot
---
-endif::backend-revealjs[]
+// end::slide-17[]
+
 
 
 
 === Dupliquer une entrée et utiliser des références
+
+// tag::slide-18[]
 
 Avec Keepass, il est possible de dupliquer des entrées et une option permet de conserver une référence entre les entrées. 
 
@@ -374,26 +393,34 @@ Par exemple : le LDAP Open est utilisé sur plusieurs applications.
 * https://openspace.open-groupe.com/
 * https://login.microsoftonline.com/
 
+// end::slide-18[]
+
 image::12-DupliquerEntree-Clic.jpg[]
 
 image::13-DupliquerEntree-Popup.jpg[]
 
 image::14-DupliquerEntree-NouvelleEntree.jpg[]
 
+// tag::slide-19[]
 
 Une fois dupliquée, l'entrée peut être modifiée comme n'importe quelle autre entrée.
+
+// end::slide-19[]
 
 image::15-DupliquerEntree-ModifierEntree.jpg[]
 
 image::16-DupliquerEntree-EntreeModifiee.jpg[]
 
-[TIP]
+// tag::slide-20[]
+
+[TIP.speaker]
 --
 On peut modifier l'utilisateur et faire une concaténation avec la référence : @open-groupe.com
 
 image::17-DupliquerEntree-ModifierUtilisateur.jpg[]
 --
 
+// end::slide-20[]
 
 
 
@@ -401,6 +428,8 @@ image::17-DupliquerEntree-ModifierUtilisateur.jpg[]
 == Auto-type
 
 === Configurer l'Auto-type
+
+// tag::slide-21[]
 
 Par défaut, l'auto-type fonctionne avec le titre de la fenêtre dans le titre de l'entrée.
 
@@ -415,15 +444,14 @@ De plus, l'auto-type ne fonctionne plus si on change le nom de l'entrée :
 * Pilot -> OPEN - Pilot.
 
 
-ifdef::backend-revealjs[]
 [TIP.speaker]
 --
 Il semble que l'auto-type "Target Windows" permette de s'exécuter sur la fenêtre appelée. 
 
 Mais si toutes les entrées sont nommées comme ça, il sera difficile de trouver l'entrée vraiment voulue.
 --
-endif::backend-revealjs[]
 
+// end::slide-21[]
 
 
 

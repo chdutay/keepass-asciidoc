@@ -1,27 +1,49 @@
-// Options revealjs pour les Slides
-:revealjs_theme: white
-:theme: white
-:revealjs_history: true
-:history: true
+= Keepass : Gestionnaire de mot de passe
+:revealjs_customtheme: theme/slide/simple.css
+
+// https://revealjs.com/?transition=slide#/themes
+
 :revealjs_center: false
+:revealjs_controls: true
+:revealjs_progress: true
+:revealjs_slideNumber: true
+:revealjs_history: true
+:revealjs_keyboard: true
+
+// Options revealjs pour les Slides
+
+
+////
+:theme: white
+
+:revealjs_history: true
+
+:history: true
+
+:revealjs_center: false
+
 :center: false
+////
+
 
 // activer les macros menu: et kbd:
+
 :experimental: true
 
 // .admonitions-font
+
 // :include: //div[@class="slides"]
+
 // :header_footer:
+
 :icons: font
 
-:revnumber: {project-version}
-:example-caption!:
 ifndef::imagesdir[:imagesdir: images]
 
-
-= Keepass : Gestionnaire de mot de passe
 Dutay Charles-Henri
 2017-11-21
+
+
 
 == Introduction
 
@@ -75,3 +97,68 @@ include::keepass.adoc[tags=slide-10,indent=0]
 --
 Supprimer les groupes
 --
+
+
+
+
+== Une nouvelle entrée 
+
+include::keepass.adoc[tags=slide-11,indent=0]
+
+ifdef::backend-revealjs[=== !]
+
+include::keepass.adoc[tags=slide-12,indent=0]
+
+[NOTE.speaker]
+--
+Nous allons créer une nouvelle entrée pour PILOT : https://pilot.open-groupe.com/
+
+Faire expirer une clé pendant la séance afin de montrer l'intérêt de cette option.
+--
+
+== Générateur de mot de passe
+
+
+include::keepass.adoc[tags=slide-13,indent=0]
+
+include::keepass.adoc[tags=slide-14,indent=0]
+
+
+[NOTE.speaker]
+--
+include::keepass.adoc[tags=slide-15,indent=0]
+--
+
+
+== Utiliser les entrées enregistrées dans Keepass
+
+include::keepass.adoc[tags=slide-16,indent=0]
+
+=== Utiliser l'Auto-type 
+
+include::keepass.adoc[tags=slide-17,indent=0]
+
+[NOTE.speaker]
+--
+Faire la démonstration avec Pilot
+--
+
+
+=== Dupliquer une entrée et utiliser des références
+
+include::keepass.adoc[tags=slide-18,indent=0]
+
+include::keepass.adoc[tags=slide-19,indent=0]
+
+include::keepass.adoc[tags=slide-20,indent=0]
+
+
+
+
+== Auto-type
+
+=== Configurer l'Auto-type
+
+include::keepass.adoc[tags=slide-21,indent=0]
+
+
