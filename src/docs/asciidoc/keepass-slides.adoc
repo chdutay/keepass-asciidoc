@@ -1,5 +1,5 @@
 = Keepass : Gestionnaire de mot de passe
-:revealjs_customtheme: theme/slide/simple.css
+:revealjs_customtheme: themes/slide/simple.css
 
 // https://revealjs.com/?transition=slide#/themes
 
@@ -19,11 +19,11 @@
 :revealjs_history: true
 
 :history: true
+////
 
 :revealjs_center: false
 
 :center: false
-////
 
 
 // activer les macros menu: et kbd:
@@ -54,6 +54,12 @@ include::keepass.adoc[tags=slide-2,indent=0]
 === Pourquoi utiliser Keepass ?
 
 include::keepass.adoc[tags=slide-3,indent=0]
+
+
+=== !
+
+image::s01-boring.jpeg[]
+
 
 [NOTE.speaker]
 --
