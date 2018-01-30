@@ -19,7 +19,7 @@ body {
 
 .reveal {
   font-family: "Lato", sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: normal;
   color: #000; }
 
@@ -33,8 +33,12 @@ body {
   background: rgba(0, 0, 0, 0.99);
   text-shadow: none; }
 
+.reveal .slides {
+  margin-top: 1px; }
+
 .reveal .slides > section,
 .reveal .slides > section > section {
+  text-align: justify;
   line-height: 1.3;
   font-weight: inherit; }
 
